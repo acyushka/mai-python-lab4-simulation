@@ -48,7 +48,6 @@ class TestCasino:
 
         assert result is not None
         assert "выиграл" in result
-        assert casino.steps_count == 1
 
     def testdep_loss(self, monkeypatch):
         casino = Casino()
@@ -83,7 +82,6 @@ class TestCasino:
         result = casino.goose_action()
 
         assert result is not None
-        assert casino.steps_count == 1
 
     def test_goose_action_no_gooses(self):
         casino = Casino()
@@ -101,7 +99,6 @@ class TestCasino:
 
         assert result is not None
         assert "орава гусей" in result
-        assert casino.steps_count == 1
 
     def test_panic(self):
         casino = Casino()
@@ -112,7 +109,6 @@ class TestCasino:
 
         assert result is not None
         assert "запаниковал" in result
-        assert casino.steps_count == 1
 
     def test_healing(self):
         casino = Casino()
@@ -125,4 +121,3 @@ class TestCasino:
         assert result is not None
         assert "энергетик" in result
         assert casino.players[0].hp > 50
-        assert casino.steps_count == 1

@@ -86,12 +86,14 @@ class Casino:
                 if self.balances[player.name] <= 0:
                     del self.balances[player.name]
                     self.players.remove(player)
+                    print("  - Игрок")
+
                     return f"Игрок {player.name} поставил все свои фишки и проиграл. Вдруг за ним пришли два гуся с дубинами и увели его.."
 
                 return f"Игрок {player.name} поставил ${dep.value} и ставка не залетела.."
 
     def goose_action(self) -> str | None:
-        if self.gooses:
+        if self.gooses and self.players:
             self.steps_count += 1
 
             goose = self.gooses.get_random_goose()
@@ -120,6 +122,7 @@ class Casino:
                     killed_players += 1
                     amount += self.balances[victim.name]
 
+                    print("  - Игрок")
                     del self.balances[victim.name]
                     self.players.remove(victim)
 
@@ -143,8 +146,11 @@ class Casino:
             amount = self.balances[player.name]
             if amount > 0:
                 self.gooses_income[goose.name] += amount
+
+                print("  - Игрок")
                 del self.balances[player.name]
                 self.players.remove(player)
+
                 msg += f"Гусь {goose.name} забрал со стола оставленные игроком ${amount}"
 
             return msg

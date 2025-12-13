@@ -34,6 +34,7 @@ class WarGoose(Goose):
             casino.gooses_income[self.name] += casino.balances[victim.name]
             del casino.balances[victim.name]
             casino.players.remove(victim)
+            print("  - Игрок")
 
         return msg
 
@@ -57,6 +58,7 @@ class HonkGoose(Goose):
                 killed_players += 1
                 del casino.balances[player.name]
                 casino.players.remove(player)
+                print("  - Игрок")
 
         msg = f"Гусь {self.name} издал крик громкостью {self.honk_volume}. Пострадало {stunned_players} игроков!"
         if killed_players > 1:

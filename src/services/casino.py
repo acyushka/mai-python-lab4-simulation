@@ -16,7 +16,10 @@ NAMES = [
     ]
 
 class Casino:
+    """Главная бизнес-логика всего сервиса"""
+
     def __init__(self):
+        """Инициализация всех нужных коллекций, имен, и счетчика шагов симуляции"""
         self.players = PlayerCollection()
         self.gooses = GooseCollection()
         self.balances = CasinoBalance()
@@ -26,7 +29,10 @@ class Casino:
         self.steps_count = 0
 
     def register_player(self, name: str = "---1", balance: int = -1) -> str | None:
+        """Регистрация игроков"""
         if self.names:
+            self.steps_count += 1
+
             if name == "---1":
                 name = self.names.pop()
             if balance == -1:
@@ -41,6 +47,8 @@ class Casino:
 
     def register_goose(self, goose_type: str = "0", name: str = "---1", honk_volume: int = -1) -> str | None:
         if self.names:
+            self.steps_count += 1
+
             if goose_type == "0":
                 goose_type = choice(("war", "honk"))
             if name == "---1":
@@ -206,6 +214,8 @@ def run_simulation(steps: int = 20, seed: int | None = None) -> None:
 
     casino.register_goose("war", "Васян", 10)
     casino.register_goose("honk", "Клык", 5)
+
+    casino.steps_count -= 6 # вернуть счетчик шагов после инициализации к 0
 
     while casino.steps_count < steps:
         print()
